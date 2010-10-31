@@ -2,6 +2,7 @@ package org.highscreen.common;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -12,7 +13,7 @@ import android.content.Intent;
  */
 public abstract class BaseActivity extends Activity {
 
-
+	AlexScreensaverLock lock;
 
     private final static String ALEX_UPDATE_TITLE = "org.highscreen.launcher.UPDATE_TITLE";
 
@@ -26,6 +27,30 @@ public abstract class BaseActivity extends Activity {
             ex.printStackTrace();
         }
     }
+    
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        lock = new AlexScreensaverLock(this);
+        lock.acquire();
+    }
 
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        lock.acquire();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        lock.acquire();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        lock.release();
+    }
 
 }

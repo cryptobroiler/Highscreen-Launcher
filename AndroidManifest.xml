@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          android:versionCode="11" android:versionName="1.5.7" package="org.highscreen.launcher">
-    <application android:icon="@drawable/icon" android:label="Launcher"
-                 android:theme="@android:style/Theme.Light.NoTitleBar">
-        <activity android:name=".LauncherActivity" android:stateNotNeeded="true" android:configChanges="mcc|mnc"
-                  android:screenOrientation="nosensor" android:launchMode="singleInstance">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.HOME"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter><!--
-            <intent-filter>
-                <action android:name="com.bravo.intent.action.HOME_VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        --></activity>
-    </application>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	android:versionCode="11" android:versionName="1.5.7" package="org.highscreen.launcher">
+	<application android:icon="@drawable/icon" android:label="Launcher"
+		android:theme="@android:style/Theme.Light.NoTitleBar">
+		<activity android:name=".LauncherActivity"
+			android:clearTaskOnLaunch="true" android:stateNotNeeded="true"
+			android:configChanges="mcc|mnc" android:screenOrientation="nosensor"
+			android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.HOME" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter><!-- <intent-filter> <action android:name="com.bravo.intent.action.HOME_VIEW"/> 
+				<category android:name="android.intent.category.DEFAULT"/> </intent-filter> -->
+		</activity>
+	</application>
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>

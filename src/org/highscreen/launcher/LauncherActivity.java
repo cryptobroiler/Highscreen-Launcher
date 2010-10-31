@@ -21,7 +21,6 @@ import org.highscreen.launcher.items.AbstractItem;
  * change this template use File | Settings | File Templates.
  */
 
-
 public class LauncherActivity extends BaseActivity {
 
 	List<AbstractItem> items = null;
@@ -38,12 +37,13 @@ public class LauncherActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		Log.d("NOOK", "Shit started!");
+
 		selector = new ImageView(this);
 		selector.setImageResource(R.drawable.selector);
 		selector.setLayoutParams(new ViewGroup.LayoutParams(96, 144));
 
-		topDock = ((LinearLayout) findViewById(R.id.topDock));
-		bottomDock = ((LinearLayout) findViewById(R.id.bottomDock));
+		topDock = getTopDock();
+		bottomDock = getBottomDock();
 		scrollView = ((HorizontalScrollView) findViewById(R.id.apps_scroll));
 
 		((ImageButton) findViewById(R.id.exit))
@@ -69,7 +69,17 @@ public class LauncherActivity extends BaseActivity {
 											to = bottomDock;
 										}
 										addItemView(item, to);
-										items.add(item);
+										int resultIndex = 0;
+										if (to == topDock) {
+											resultIndex = topDock
+													.getChildCount() * 2 - 2;
+										} else {
+											resultIndex = bottomDock
+													.getChildCount() * 2 - 1;
+
+										}
+										;
+										items.add(resultIndex, item);
 										saveChanges();
 									}
 								});
@@ -115,9 +125,26 @@ public class LauncherActivity extends BaseActivity {
 
 								parent.removeView(selectedView);
 								parent.addView(selectedView, index - 1);
+								// items.remove(selectedItem);
 
-								items.remove(selectedItem);
-								items.add(index - 1, selectedItem);
+								if (parent == topDock) {
+									AbstractItem leftItem = items
+											.get(2 * index - 2);
+									items.remove(selectedItem);
+									items.add(2 * index - 2, selectedItem);
+									items.remove(leftItem);
+
+									items.add(2 * index, leftItem);
+								} else {
+									AbstractItem leftItem = items
+											.get(2 * index - 1);
+									items.remove(selectedItem);
+									items.add(2 * index - 1, selectedItem);
+									items.remove(leftItem);
+
+									items.add(2 * index + 1, leftItem);
+								}
+								dumpItems();
 
 							} else
 								focusScroll(parent.getChildAt(0));
@@ -132,6 +159,9 @@ public class LauncherActivity extends BaseActivity {
 							LinearLayout parent = ((LinearLayout) selectedView
 									.getParent());
 							int index = getItemIndex(selectedView, parent);
+							Log.d("NOOK",
+									"Turning right, index="
+											+ String.valueOf(index));
 							if ((index != -1)
 									&& (index < parent.getChildCount() - 1)) {
 								focusScroll(parent.getChildAt(index + 1));
@@ -143,8 +173,24 @@ public class LauncherActivity extends BaseActivity {
 
 								focusScroll(selectedView);
 
-								items.remove(selectedItem);
-								items.add(index + 1, selectedItem);
+								if (parent == topDock) {
+									AbstractItem rightItem = items
+											.get(2 * index + 2);
+									items.remove(rightItem);
+									items.add(2 * index, rightItem);
+									items.remove(selectedItem);
+									items.add(2 * index + 2, selectedItem);
+
+								} else {
+									AbstractItem rightItem = items
+											.get(2 * index + 3);
+									items.remove(rightItem);
+									items.add(2 * (index) + 1, rightItem);
+									items.remove(selectedItem);
+									items.add(2 * (index) + 3, selectedItem);
+
+								}
+								dumpItems();
 
 							} else if (index == parent.getChildCount() - 1) {
 								focusScroll(parent.getChildAt(parent
@@ -162,41 +208,65 @@ public class LauncherActivity extends BaseActivity {
 							LinearLayout opposite = (parent == topDock) ? bottomDock
 									: topDock;
 							int index = getItemIndex(selectedView, parent);
+							if (opposite.getChildAt(index) != null) {
+								View oppositeView = opposite.getChildAt(index);
+								opposite.removeView(oppositeView);
+								parent.removeView(selectedView);
+								opposite.addView(selectedView, index);
+								parent.addView(oppositeView, index);
 
-							parent.removeView(selectedView);
-							opposite.addView(selectedView, index);
-							focusScroll(opposite.getChildAt(index));
+								focusScroll(opposite.getChildAt(index));
 
-							items.remove(selectedItem);
-							items.add(index, selectedItem);
+								if (parent == topDock) {
+									items.remove(selectedItem);
+									items.add(2 * index + 1, selectedItem);
+								} else {
+									items.remove(selectedItem);
+									items.add(2 * index, selectedItem);
+
+								}
+							}
 
 						}
 					}
 				});
 		((ImageButton) findViewById(R.id.turnDown))
-		.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View view) {
-				if ((selectedItem != null) && (selectedView != null)) {
-					LinearLayout parent = ((LinearLayout) selectedView
-							.getParent());
-					LinearLayout opposite = (parent == topDock) ? bottomDock
-							: topDock;
-					int index = getItemIndex(selectedView, parent);
+				.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View view) {
+						if ((selectedItem != null) && (selectedView != null)) {
+							LinearLayout parent = ((LinearLayout) selectedView
+									.getParent());
+							LinearLayout opposite = (parent == topDock) ? bottomDock
+									: topDock;
+							int index = getItemIndex(selectedView, parent);
+							if (opposite.getChildAt(index) != null) {
+								View oppositeView = opposite.getChildAt(index);
+								opposite.removeView(oppositeView);
+								parent.removeView(selectedView);
+								opposite.addView(selectedView, index);
+								parent.addView(oppositeView, index);
 
-					parent.removeView(selectedView);
-					opposite.addView(selectedView, index);
-					focusScroll(opposite.getChildAt(index));
+								focusScroll(opposite.getChildAt(index));
 
-					items.remove(selectedItem);
-					items.add(index, selectedItem);
+								if (parent == topDock) {
+									items.remove(selectedItem);
+									items.add(2 * index + 1, selectedItem);
+								} else {
+									items.remove(selectedItem);
+									items.add(2 * index, selectedItem);
 
-				}
-			}
-		});
+								}
+							}
+
+						}
+					}
+				});
 
 		((ImageButton) findViewById(R.id.refresh))
 				.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View view) {
+						selectedItem = null;
+						selectedView = null;
 						updateItems();
 						startEdit();
 						/*
@@ -223,10 +293,18 @@ public class LauncherActivity extends BaseActivity {
 		updateItems();
 	}
 
+	private LinearLayout getBottomDock() {
+		return ((LinearLayout) findViewById(R.id.bottomDock));
+	}
+
+	private LinearLayout getTopDock() {
+		return ((LinearLayout) findViewById(R.id.topDock));
+	}
+
 	void updateItems() {
 		items = ItemFactory.loadItems(this);
-
-		topDock = ((LinearLayout) findViewById(R.id.topDock));
+		dumpItems();
+		topDock = getTopDock();
 		topDock.removeAllViews();
 		bottomDock = (LinearLayout) findViewById(R.id.bottomDock);
 		bottomDock.removeAllViews();
@@ -372,10 +450,17 @@ public class LauncherActivity extends BaseActivity {
 	void saveChanges() {
 		long start = System.currentTimeMillis();
 		ItemFactory.saveItems(items, this);
-
+		dumpItems();
 		long time = System.currentTimeMillis() - start;
 
 		Log.d("TEST", "Time:" + time);
+	}
+
+	private void dumpItems() {
+		for (int i = 0; i < items.size(); i++) {
+			Log.d("NOOK", "Item at " + String.valueOf(i) + ":"
+					+ items.get(i).getCaption());
+		}
 	}
 
 	@Override
