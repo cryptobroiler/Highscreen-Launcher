@@ -59,7 +59,7 @@ public class ItemFactory {
 
 //        items.add(new ItemsStorage.Item(AbstractItem.TYPE_READING_NOW, ""));
 //
-items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI, ""));
+//items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI, ""));
 items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""));
 
         return items.toArray(new ItemsStorage.Item[0]);
