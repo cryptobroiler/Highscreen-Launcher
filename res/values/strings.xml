@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">myNookHome</string>
-    <string name="cancel">Cancel</string>
+    <string name="app_name">HIGHSCREEN Launcher</string>
+    <string name="cancel">Отмена</string>
     <string name="start_wifi">Включение Wi-Fi</string>
-    <string name="please_wait">Please wait</string>
+    <string name="please_wait">Пожалуйста подождите</string>
     <string name="wifi_timeout">Таймаут включения Wi-Fi</string>
-    <string name="too_little_items">There is no sense to have less than 5 items at home screen.</string>
+    <string name="too_little_items">Нет смысла иметь менее 10 объектов на экране</string>
 </resources>

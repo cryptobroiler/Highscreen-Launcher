@@ -36,7 +36,7 @@ public class LauncherActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		Log.d("NOOK", "Shit started!");
+		Log.d("Alex Launcher", "Shit started!");
 
 		selector = new ImageView(this);
 		selector.setImageResource(R.drawable.selector);
@@ -91,7 +91,7 @@ public class LauncherActivity extends BaseActivity {
 				.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
-							if (items.size() <= 5) {
+							if (items.size() <= 10) {
 								Toast t = Toast.makeText(LauncherActivity.this,
 										R.string.too_little_items,
 										Toast.LENGTH_LONG);
@@ -159,7 +159,7 @@ public class LauncherActivity extends BaseActivity {
 							LinearLayout parent = ((LinearLayout) selectedView
 									.getParent());
 							int index = getItemIndex(selectedView, parent);
-							Log.d("NOOK",
+							Log.d("Alex Launcher",
 									"Turning right, index="
 											+ String.valueOf(index));
 							if ((index != -1)
@@ -458,7 +458,7 @@ public class LauncherActivity extends BaseActivity {
 
 	private void dumpItems() {
 		for (int i = 0; i < items.size(); i++) {
-			Log.d("NOOK", "Item at " + String.valueOf(i) + ":"
+			Log.d("Alex Launcher", "Item at " + String.valueOf(i) + ":"
 					+ items.get(i).getCaption());
 		}
 	}
