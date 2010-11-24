@@ -36,7 +36,6 @@ public class LauncherActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		Log.d("Alex Launcher", "Shit started!");
 
 		selector = new ImageView(this);
 		selector.setImageResource(R.drawable.selector);
@@ -159,9 +158,8 @@ public class LauncherActivity extends BaseActivity {
 							LinearLayout parent = ((LinearLayout) selectedView
 									.getParent());
 							int index = getItemIndex(selectedView, parent);
-							Log.d("Alex Launcher",
-									"Turning right, index="
-											+ String.valueOf(index));
+							Log.d("Alex Launcher", "Turning right, index="
+									+ String.valueOf(index));
 							if ((index != -1)
 									&& (index < parent.getChildCount() - 1)) {
 								focusScroll(parent.getChildAt(index + 1));

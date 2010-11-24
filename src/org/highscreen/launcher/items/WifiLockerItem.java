@@ -51,7 +51,7 @@ public class WifiLockerItem extends ToggleItem {
 
     @Override
     public int getType() {
-        return TYPE_WIFI;
+        return TYPE_WIFI_LOCK;
     }
 
     @Override

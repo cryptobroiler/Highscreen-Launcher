@@ -10,16 +10,14 @@ import android.view.View;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-/**
-  * User: ex3ndr
- * Date: 13.07.2010
- * Time: 3:08:12
-  */
+import org.highscreen.launcher.R;
+
+
 public abstract class AbstractItem {
 
     public static AbstractItem createItem(String data, int id, Context context) {
         switch (id) {
-            case TYPE_WIFI:
+            case TYPE_WIFI_LOCK:
                 return new WifiLockerItem(context);
             case TYPE_WIFI_TOGGLE:
             	return new WifiToggler(context);
@@ -37,6 +35,10 @@ public abstract class AbstractItem {
                 return new StandardItem(params[0], params[1], params[2], label, works);
             case TYPE_READING_NOW:
                 return new ReadingNowItem();
+            case TYPE_HYPERLINK:
+            	String[] dataSplit = data.split(";", 3);
+            	return new HyperlinkItem(dataSplit[2], dataSplit[1], dataSplit[0]);
+            	
         }
 
         return null;
@@ -54,10 +56,11 @@ public abstract class AbstractItem {
     protected OnStartEditListener editListener;
     protected boolean isEditing = false;
 
-    public static final int TYPE_WIFI = 1;
+    public static final int TYPE_WIFI_LOCK = 1;
     public static final int TYPE_STANDARD = 2;
     public static final int TYPE_READING_NOW = 3;
     public static final int TYPE_WIFI_TOGGLE = 4;
+	public static final int TYPE_HYPERLINK = 5;
 
     public abstract int getType();
 

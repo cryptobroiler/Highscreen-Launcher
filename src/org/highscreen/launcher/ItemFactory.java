@@ -13,18 +13,11 @@ import org.highscreen.launcher.db.ItemsStorage;
 import org.highscreen.launcher.items.AbstractItem;
 import org.highscreen.launcher.items.StandardItem;
 
-/**
- * Created by IntelliJ IDEA. User: ex3ndr Date: 13.07.2010 Time: 4:26:50 To
- * change this template use File | Settings | File Templates.
- */
+
 public class ItemFactory {
 
 	public static final String[] BLOCKED = new String[] {
-			"com.bravo.ereader.activities.ReaderActivity",
-			"com.bravo.reader.instore.ReaderActivity",
-			"com.ereader.android.nook.ReaderActivity",
-			"com.android.development.Development", "com.bravo.FormatSdcard",
-			"com.bravo.app.log.LogSettings",
+			"com.android.development.Development",
 			// "org.geometerplus.android.fbreader.FBReader",
 			"org.highscreen.launcher.LauncherActivity", };
 
@@ -49,17 +42,16 @@ public class ItemFactory {
 		for (ResolveInfo i : installed) {
 			if (isBlocked(i.activityInfo.name))
 				continue;
-			Log.d("NOOK:", Intent.ACTION_MAIN + ":"
+			Log.d("ALEX:", Intent.ACTION_MAIN + ":"
 					+ i.activityInfo.packageName + ":" + i.activityInfo.name);
 			items.add(new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
 					Intent.ACTION_MAIN + ":" + i.activityInfo.packageName + ":"
 							+ i.activityInfo.name));
 		}
 
-		// items.add(new ItemsStorage.Item(AbstractItem.TYPE_READING_NOW, ""));
-		//
-		// items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI, ""));
 		items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""));
+		items.add(new ItemsStorage.Item(AbstractItem.TYPE_HYPERLINK,
+				"‹итрес;org.highscreen.launcher.litres;http://highscreen.litres.ru"));
 
 		return items.toArray(new ItemsStorage.Item[0]);
 	}
@@ -69,6 +61,8 @@ public class ItemFactory {
 				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.android.settings:com.android.settings.Settings"),
 				new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""),
+				new ItemsStorage.Item(AbstractItem.TYPE_HYPERLINK,
+						"‹итђес;org.highscreen.launcher.litres;http://highscreen.litres.ru"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.android.email:com.android.email.activity.Welcome"),
