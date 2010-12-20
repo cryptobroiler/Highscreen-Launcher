@@ -86,31 +86,6 @@ public class LauncherActivity extends BaseActivity {
 					}
 				});
 
-		((ImageButton) findViewById(R.id.remove))
-				.setOnClickListener(new View.OnClickListener() {
-					public void onClick(View view) {
-						if ((selectedItem != null) && (selectedView != null)) {
-							if (items.size() <= 10) {
-								Toast t = Toast.makeText(LauncherActivity.this,
-										R.string.too_little_items,
-										Toast.LENGTH_LONG);
-								t.setGravity(Gravity.CENTER, t.getXOffset(),
-										t.getYOffset());
-								t.show();
-								return;
-							}
-							((LinearLayout) selectedView.getParent())
-									.removeView(selectedView);
-							// topDock.removeView(selectedView);
-							items.remove(selectedItem);
-							selectedView = null;
-							selectedItem = null;
-
-							saveChanges();
-						}
-					}
-				});
-
 		((ImageButton) findViewById(R.id.turnLeft))
 				.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View view) {
@@ -255,6 +230,74 @@ public class LauncherActivity extends BaseActivity {
 
 								}
 							}
+
+						}
+					}
+				});
+		((ImageButton) findViewById(R.id.remove))
+				.setOnClickListener(new View.OnClickListener() {
+					public void onClick(View view) {
+						if ((selectedItem != null) && (selectedView != null)) {
+							if (items.size() <= 0) {
+								Toast t = Toast.makeText(LauncherActivity.this,
+										R.string.too_little_items,
+										Toast.LENGTH_LONG);
+								t.setGravity(Gravity.CENTER, t.getXOffset(),
+										t.getYOffset());
+								t.show();
+								return;
+							}
+							// ((LinearLayout) selectedView.getParent())
+							// .removeView(selectedView);
+							// topDock.removeView(selectedView);
+							int indexInItems;
+							indexInItems = items.indexOf(selectedItem);
+							// for (int i = indexInItems; i < items.size(); i++)
+							// {
+							// if (i % 2 == 0) {
+							// Log.d("Alex Launcher", "Removing view at top :" +
+							// indexInItems / 2);
+							// topDock.removeViewAt((indexInItems) / 2);
+							// } else {
+							// Log.d("Alex Launcher", "Removing view at bottom:"
+							// + (indexInItems - 1) / 2);
+							//
+							// bottomDock.removeViewAt((indexInItems) / 2);
+							// }
+							// }
+							int index = getItemIndex(selectedView,((LinearLayout) selectedView
+									.getParent()));
+							items.remove(selectedItem);
+							Log.d("Alex Launcher", "Deleting " + indexInItems);
+							if (indexInItems % 2 == 0) { // removing from
+															// topDock
+								bottomDock.removeViews(index,
+										bottomDock.getChildCount() - index);
+								topDock.removeViews(index,
+										topDock.getChildCount() - index);
+							} else { // removing from bottomDock
+								Log.d("Alex Launcher", "Shift from " + index
+										+ "; total count "
+										+ (topDock.getChildCount() - index - 1));
+								topDock.removeViews(index + 1,
+										topDock.getChildCount() - index - 1);
+								bottomDock.removeViews(index,
+										bottomDock.getChildCount() - index);
+
+
+
+							}
+							for (int i = indexInItems; i < items.size(); i++) {
+								if (i % 2 == 0) {
+									addItemView(items.get(i), topDock);
+								} else {
+									addItemView(items.get(i), bottomDock);
+								}
+
+							}
+							selectedView = null;
+							selectedItem = null;
+							saveChanges();
 
 						}
 					}

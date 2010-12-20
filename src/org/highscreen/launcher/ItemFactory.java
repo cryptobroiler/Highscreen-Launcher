@@ -13,7 +13,6 @@ import org.highscreen.launcher.db.ItemsStorage;
 import org.highscreen.launcher.items.AbstractItem;
 import org.highscreen.launcher.items.StandardItem;
 
-
 public class ItemFactory {
 
 	public static final String[] BLOCKED = new String[] {
@@ -51,27 +50,31 @@ public class ItemFactory {
 
 		items.add(new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""));
 		items.add(new ItemsStorage.Item(AbstractItem.TYPE_HYPERLINK,
-				"‹итрес;org.highscreen.launcher.litres;http://highscreen.litres.ru"));
+				"‹итђес;org.highscreen.launcher.litres;http://highscreen.litres.ru"));
+		items.add(new ItemsStorage.Item(
+				AbstractItem.TYPE_STANDARD,
+				"android.intent.action.MAIN:org.geometerplus.zlibrary.ui.android:org.geometerplus.android.fbreader.RecentBooksActivity"));
 
 		return items.toArray(new ItemsStorage.Item[0]);
 	}
 
 	private static ItemsStorage.Item[] getDefault() {
 		return new ItemsStorage.Item[] {
-				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:com.android.settings:com.android.settings.Settings"),
-				new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""),
-				new ItemsStorage.Item(AbstractItem.TYPE_HYPERLINK,
-						"‹итђес;org.highscreen.launcher.litres;http://highscreen.litres.ru"),
+				new ItemsStorage.Item(
+						AbstractItem.TYPE_STANDARD,
+						"android.intent.action.MAIN:org.geometerplus.zlibrary.ui.android:org.geometerplus.android.fbreader.FBReader"),
+				new ItemsStorage.Item(
+						AbstractItem.TYPE_STANDARD,
+						"android.intent.action.MAIN:com.android.browser:com.android.browser.BrowserActivity"),
+				new ItemsStorage.Item(
+						AbstractItem.TYPE_STANDARD,
+						"android.intent.action.MAIN:org.geometerplus.zlibrary.ui.android:org.geometerplus.android.fbreader.RecentBooksActivity"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.android.email:com.android.email.activity.Welcome"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:com.android.camera:com.android.camera.GalleryPicker"),
-				new ItemsStorage.Item(
-						AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:com.android.browser:com.android.browser.BrowserActivity"),
+						"android.intent.action.MAIN:alex.reader.ebook.viewer:alex.reader.ebook.viewer.activity.About"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.android.music:com.android.music.MusicBrowserActivity"),
@@ -80,18 +83,23 @@ public class ItemFactory {
 						"android.intent.action.MAIN:alex.reader.ebook.viewer:alex.reader.ebook.viewer.activity.MainMenuActivity"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:alex.reader.ebook.viewer:alex.reader.ebook.viewer.activity.About"),
-				new ItemsStorage.Item(
-						AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:com.android.calculator2:com.android.calculator2.Calculator"),
+						"android.intent.action.MAIN:com.android.camera:com.android.camera.GalleryPicker"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.funkyandroid.appstore.client.alex:com.funkyandroid.appstore.client.alex.AppStoreClient"),
+
 				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:com.mobilein.kldsp:com.mobilein.kldsp.MainActivity"),
+						"android.intent.action.MAIN:com.android.settings:com.android.settings.Settings"),
 				new ItemsStorage.Item(
 						AbstractItem.TYPE_STANDARD,
-						"android.intent.action.MAIN:org.geometerplus.zlibrary.ui.android:org.geometerplus.android.fbreader.FBReader"),
+						"android.intent.action.MAIN:com.android.calculator2:com.android.calculator2.Calculator"),
+				new ItemsStorage.Item(AbstractItem.TYPE_WIFI_TOGGLE, ""),
+				new ItemsStorage.Item(AbstractItem.TYPE_HYPERLINK,
+						"‹итђес;org.highscreen.launcher.litres;http://highscreen.litres.ru"),
+
+				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
+						"android.intent.action.MAIN:com.mobilein.kldsp:com.mobilein.kldsp.MainActivity"),
+
 				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,
 						"android.intent.action.MAIN:com.mobilein.kom:com.mobilein.kom.MainActivity"),
 				new ItemsStorage.Item(AbstractItem.TYPE_STANDARD,

@@ -31,26 +31,26 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        lock = new AlexScreensaverLock(this);
-        lock.acquire();
+        //lock = new AlexScreensaverLock(this);
+        //lock.acquire();
     }
 
     @Override
     public void onUserInteraction() {
         super.onUserInteraction();
-        lock.acquire();
+//        lock.acquire();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        lock.acquire();
+//        lock.acquire();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        lock.release();
+//        lock.release();
     }
 
 }
