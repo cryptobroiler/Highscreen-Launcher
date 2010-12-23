@@ -47,6 +47,7 @@ public class LauncherActivity extends BaseActivity {
 
 		((ImageButton) findViewById(R.id.exit))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						stopEdit();
 					}
@@ -54,10 +55,12 @@ public class LauncherActivity extends BaseActivity {
 
 		((ImageButton) findViewById(R.id.add))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						AddItemDialog dialog = new AddItemDialog(
 								LauncherActivity.this,
 								new AddItemDialog.OnAddItemDialogResultListener() {
+									@Override
 									public void onAddItemDialogResult(
 											AbstractItem item) {
 										LinearLayout to;
@@ -88,6 +91,7 @@ public class LauncherActivity extends BaseActivity {
 
 		((ImageButton) findViewById(R.id.turnLeft))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
 							LinearLayout parent = ((LinearLayout) selectedView
@@ -128,6 +132,7 @@ public class LauncherActivity extends BaseActivity {
 
 		((ImageButton) findViewById(R.id.turnRight))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
 							LinearLayout parent = ((LinearLayout) selectedView
@@ -174,6 +179,7 @@ public class LauncherActivity extends BaseActivity {
 				});
 		((ImageButton) findViewById(R.id.turnUp))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
 							LinearLayout parent = ((LinearLayout) selectedView
@@ -205,6 +211,7 @@ public class LauncherActivity extends BaseActivity {
 				});
 		((ImageButton) findViewById(R.id.turnDown))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
 							LinearLayout parent = ((LinearLayout) selectedView
@@ -236,9 +243,10 @@ public class LauncherActivity extends BaseActivity {
 				});
 		((ImageButton) findViewById(R.id.remove))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						if ((selectedItem != null) && (selectedView != null)) {
-							if (items.size() <= 0) {
+							if (items.size() <= 10) {
 								Toast t = Toast.makeText(LauncherActivity.this,
 										R.string.too_little_items,
 										Toast.LENGTH_LONG);
@@ -305,6 +313,7 @@ public class LauncherActivity extends BaseActivity {
 
 		((ImageButton) findViewById(R.id.refresh))
 				.setOnClickListener(new View.OnClickListener() {
+					@Override
 					public void onClick(View view) {
 						selectedItem = null;
 						selectedView = null;
@@ -416,6 +425,7 @@ public class LauncherActivity extends BaseActivity {
 		view.addView(itemView);
 
 		i.setStartEditListener(new AbstractItem.OnStartEditListener() {
+			@Override
 			public void onStartEdit(AbstractItem item) {
 				selectedView = view;
 				selectedItem = i;
@@ -433,6 +443,7 @@ public class LauncherActivity extends BaseActivity {
 		topDock.addView(view);
 
 		i.setItemSelectedListener(new AbstractItem.OnItemSelectedListener() {
+			@Override
 			public void onItemSelected(AbstractItem item) {
 				ViewParent parent = selector.getParent();
 				if (parent != null)
@@ -458,6 +469,7 @@ public class LauncherActivity extends BaseActivity {
 		view.addView(itemView);
 
 		i.setStartEditListener(new AbstractItem.OnStartEditListener() {
+			@Override
 			public void onStartEdit(AbstractItem item) {
 				selectedView = view;
 				selectedItem = i;
@@ -475,6 +487,7 @@ public class LauncherActivity extends BaseActivity {
 		to.addView(view);
 
 		i.setItemSelectedListener(new AbstractItem.OnItemSelectedListener() {
+			@Override
 			public void onItemSelected(AbstractItem item) {
 				ViewParent parent = selector.getParent();
 				if (parent != null)
